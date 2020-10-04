@@ -3,7 +3,7 @@ The task for job application at company SedamIT. The position is Android develop
 
 ## Naziv zadatka:
 
-Aplikacija za upravljanje osobnim podacima
+Aplikacija za upravljanje osobnim podacima (**Bilješke nakon rješavanja su na dnu.**)
 
 ## Opis  zadatka:
 
