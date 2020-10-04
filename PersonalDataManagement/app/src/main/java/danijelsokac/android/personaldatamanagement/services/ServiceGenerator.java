@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class ServiceGenerator {
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl(AppConstants.WebAPI.BASE_URL + AppConstants.WebAPI.API_PREFIX)
+            .baseUrl(AppConstants.WebAPI.BASE_URL + "/" + AppConstants.WebAPI.API_PREFIX)
             .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = builder.build();
