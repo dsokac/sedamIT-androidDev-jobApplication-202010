@@ -13,8 +13,11 @@ public class UserViewModel extends ViewModel {
 
     private UserRepository repository = UserRepository.getInstance();
     private MutableLiveData<List<UserModel>> users;
+    private MutableLiveData<UserModel> user;
+    private MutableLiveData<UserModel> newUser;
+    private MutableLiveData<UserModel> deletedUser;
 
-    public LiveData<List<UserModel>> getUsers() {
+    public MutableLiveData<List<UserModel>> getUsers() {
         if(users == null) {
             users = new MutableLiveData<>();
             users = repository.getUsers();
@@ -22,4 +25,27 @@ public class UserViewModel extends ViewModel {
         return users;
     }
 
+    public MutableLiveData<UserModel> getUserById(int id) {
+        if(user == null) {
+            user = new MutableLiveData<>();
+            user = repository.getUserById(id);
+        }
+        return user;
+    }
+
+    public MutableLiveData<UserModel> deleteUserById(int id) {
+        if(deletedUser == null) {
+            deletedUser = new MutableLiveData<>();
+            deletedUser = repository.deleteUserById(id);
+        }
+        return deletedUser;
+    }
+
+    public MutableLiveData<UserModel> saveUser(UserModel user) {
+        if(newUser == null) {
+            newUser = new MutableLiveData<>();
+            newUser = repository.saveUser(user);
+        }
+        return newUser;
+    }
 }

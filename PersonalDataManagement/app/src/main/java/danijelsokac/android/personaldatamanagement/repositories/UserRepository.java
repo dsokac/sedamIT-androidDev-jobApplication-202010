@@ -51,4 +51,58 @@ public class UserRepository {
         return users;
     }
 
+    public MutableLiveData<UserModel> getUserById(int id) {
+        MutableLiveData<UserModel> user = new MutableLiveData<>();
+        userService.getUserById(id).enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                user.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                if(errorListener != null) {
+                    errorListener.onErrorOccured(t.getMessage());
+                }
+            }
+        });
+        return user;
+    }
+
+    public MutableLiveData<UserModel> saveUser(UserModel user) {
+        MutableLiveData<UserModel> savedUser = new MutableLiveData<>();
+        userService.saveUser(user).enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                savedUser.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                if(errorListener != null) {
+                    errorListener.onErrorOccured(t.getMessage());
+                }
+            }
+        });
+        return savedUser;
+    }
+
+    public MutableLiveData<UserModel> deleteUserById(int id) {
+        MutableLiveData<UserModel> deletedUser = new MutableLiveData<>();
+        userService.deleteUser(id).enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                deletedUser.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                if(errorListener != null) {
+                    errorListener.onErrorOccured(t.getMessage());
+                }
+            }
+        });
+        return deletedUser;
+    }
+
 }
