@@ -1,8 +1,10 @@
-package danijelsokac.android.personaldatamanagement;
+package danijelsokac.android.personaldatamanagement.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import danijelsokac.android.personaldatamanagement.R;
 
 public class MainActivity extends AppCompatActivity {
 
