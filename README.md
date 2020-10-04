@@ -55,7 +55,8 @@ targetCompatibility JavaVersion.VERSION_1_8
 Lombok se koristi za generiranje "getter"-a i "setter"-a.
 Kako bi se osiguralo da Lombok radi u Gradle-u, potrebno je osigurati sljedeće:
 - verzija gradle-a bi trebala biti veća ili jednaka od 0.4.3
-Također je potrebno otići na "File > Settings > Plugins", kliknuti na "Browse repositories...", potražiti "Lombok Plugin", instalirati ga i ponovno pokrenuti Android studio.
+
+**Da bi se moglo gledati projekt sa Lombokom** potrebno je otići na "File > Settings > Plugins", kliknuti na "Browse repositories...", potražiti "Lombok Plugin", instalirati ga i ponovno pokrenuti Android studio.
 
 ### Hilt
 Da bi se pokrenuo projekt koji uključuje "Hilt", potrebno je imati **Android Studio 3.6. ili noviji**.
