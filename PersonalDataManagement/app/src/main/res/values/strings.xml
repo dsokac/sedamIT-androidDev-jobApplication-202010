@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Aplikacija za upravljanje osobnim podacima</string>
+    <string name="person_item_img_desc">Avatar of the user</string>
+    <string name="default_text">Random tekst</string>
+    <string name="item_menu_icon_desc">Icon of the menu</string>
 </resources>

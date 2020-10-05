@@ -1,0 +1,53 @@
+package danijelsokac.android.personaldatamanagement.adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import danijelsokac.android.personaldatamanagement.R;
+import danijelsokac.android.personaldatamanagement.adapters.view_holders.PersonViewHolder;
+import danijelsokac.android.personaldatamanagement.models.UserModel;
+
+public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
+
+    private List<UserModel> data;
+    private Context context;
+
+    public PeopleAdapter(List<UserModel> data, Context context) {
+        this.context = context;
+        this.data = data;
+    }
+
+    @NonNull
+    @Override
+    public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item_layout, parent, false);
+        return new PersonViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
+        holder.bind(this.data.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.data.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return this.data.get(position).getId();
+    }
+}
