@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -51,6 +55,32 @@ public class MainActivity extends AppCompatActivity {
             System.out.println();
         });
 
-
     }
+
+    public void openPopUp(View v) {
+        PopupMenu menu = new PopupMenu(this, v);
+        MenuInflater inflater = menu.getMenuInflater();
+        inflater.inflate(R.menu.dot_menu, menu.getMenu());
+        menu.show();
+
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.details:
+                        //do something
+                        return true;
+                    case R.id.update:
+                        //do something
+                        return true;
+                    case R.id.delete:
+                        //do something
+                        return true;
+                    default: return false;
+                }
+            }
+        });
+    }
+
+
 }
