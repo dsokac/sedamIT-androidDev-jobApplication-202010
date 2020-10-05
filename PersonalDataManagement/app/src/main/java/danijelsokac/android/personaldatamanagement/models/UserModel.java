@@ -9,7 +9,7 @@ import lombok.Setter;
 public class UserModel {
                                private int id;
     @SerializedName("ime")     private String name;
-    @SerializedName("prezime") private String prezime;
+    @SerializedName("prezime") private String surname;
     @SerializedName("telefon") private String phoneNumber;
     @SerializedName("mobitel") private String mobilePhoneNumber;
     @SerializedName("mail")    private String email;
