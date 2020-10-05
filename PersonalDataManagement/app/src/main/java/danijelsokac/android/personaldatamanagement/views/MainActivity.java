@@ -57,30 +57,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openPopUp(View v) {
-        PopupMenu menu = new PopupMenu(this, v);
-        MenuInflater inflater = menu.getMenuInflater();
-        inflater.inflate(R.menu.dot_menu, menu.getMenu());
-        menu.show();
-
-        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.details:
-                        //do something
-                        return true;
-                    case R.id.update:
-                        //do something
-                        return true;
-                    case R.id.delete:
-                        //do something
-                        return true;
-                    default: return false;
-                }
-            }
-        });
-    }
-
-
 }
