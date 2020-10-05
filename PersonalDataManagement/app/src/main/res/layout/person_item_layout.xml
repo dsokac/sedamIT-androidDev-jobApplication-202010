@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="3dp"
     tools:context=".views.MainActivity">
 
     <LinearLayout
@@ -30,6 +31,7 @@
                 android:id="@+id/tvNameSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="0.8"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:paddingStart="3dp"
@@ -41,9 +43,13 @@
                 android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0.2"
+                android:background="#FFFFFF"
                 android:contentDescription="@string/item_menu_icon_desc"
                 android:scaleType="centerInside"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                app:srcCompat="@android:drawable/ic_menu_add"
+                android:onClick="openPopUp"/>
         </LinearLayout>
 
     </LinearLayout>
