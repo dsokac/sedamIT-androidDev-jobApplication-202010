@@ -45,7 +45,8 @@ TEXT
 - Butterknife
 - Lombok
 - Material (Google - GUI)
-- Hilt
+- RecyclerView
+- (Hilt)
 ### Butterknife
 Butterknife zahtjeva Java 8. Koristi se za dohvat "view"-ova bez dohvata po ID-u te omogućava lakše manipuliranje "view"-ovima.
 ```
