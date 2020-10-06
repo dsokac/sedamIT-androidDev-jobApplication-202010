@@ -94,7 +94,7 @@ public class EditableFormUserDialogFragment extends DialogFragment {
                     newUser.setId(user.getId());
                 }
                 newUser.setName(etName.getText().toString());
-                newUser.setSurname(etName.getText().toString());
+                newUser.setSurname(etSurname.getText().toString());
                 newUser.setPhoneNumber(etPhone.getText().toString());
                 newUser.setMobilePhoneNumber(etMobilePhone.getText().toString());
                 newUser.setEmail(etEmail.getText().toString());
