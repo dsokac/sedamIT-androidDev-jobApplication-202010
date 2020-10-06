@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -17,23 +18,37 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import danijelsokac.android.personaldatamanagement.R;
 import danijelsokac.android.personaldatamanagement.adapters.view_holders.PersonViewHolder;
+import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
 
     private List<UserModel> data;
     private Context context;
+    private FragmentManager fragmentManager;
+    private  DialogFragmentListener listener;
 
     public PeopleAdapter(List<UserModel> data, Context context) {
         this.context = context;
         this.data = data;
     }
 
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
+    }
+
+    public void setListener(DialogFragmentListener listener) {
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item_layout, parent, false);
-        return new PersonViewHolder(view);
+        PersonViewHolder vh = new PersonViewHolder(view);
+        vh.setFragmentManager(this.fragmentManager);
+        vh.setListener(listener);
+        return vh;
     }
 
     @Override

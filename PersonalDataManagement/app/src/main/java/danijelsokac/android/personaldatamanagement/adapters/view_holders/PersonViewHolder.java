@@ -10,12 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import danijelsokac.android.personaldatamanagement.R;
+import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
+import danijelsokac.android.personaldatamanagement.views.fragments.EditableFormUserDialogFragment;
 
 public class PersonViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,11 +27,21 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.imageButton) ImageButton ibMenu;
 
     private View view;
+    private FragmentManager fragmentManager;
+    private DialogFragmentListener listener;
 
     public PersonViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         view = itemView;
+    }
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
+    }
+
+    public void setListener(DialogFragmentListener listener) {
+        this.listener = listener;
     }
 
     public void bind(UserModel user) {
@@ -69,11 +82,15 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void showUserDetails(UserModel user) {
-        Toast.makeText(view.getContext(), "Details of " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();;
+        Toast.makeText(view.getContext(), "Details of " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();
+
     }
 
     private void updateUser(UserModel user) {
-        Toast.makeText(view.getContext(), "Update  " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();;
+        Toast.makeText(view.getContext(), "Update  " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();
+
+        EditableFormUserDialogFragment fragment = EditableFormUserDialogFragment.newInstance(user, listener);
+        fragment.show(fragmentManager.beginTransaction(), "EditableFormUserDialogFragment");
     }
 
     private void deleteUser(UserModel user) {
