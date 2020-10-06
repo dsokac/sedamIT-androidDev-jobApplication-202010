@@ -3,6 +3,7 @@ package danijelsokac.android.personaldatamanagement.views;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
     @BindView(R.id.rvAllPeople) RecyclerView rvAllPeople;
     @BindView(R.id.fabAction) FloatingActionButton fabACtion;
 
+    private UserViewModel userViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
 
         Object obj = this;
 
-        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getUsers().observe(this, users -> {
             Toast.makeText(this, "Users arrived", Toast.LENGTH_SHORT).show();
             System.out.println();
@@ -78,6 +81,14 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
     @Override
     public void onSave(UserModel data) {
         System.out.println("OK");
+        if(data.getId() != 0) {
+            userViewModel.updateUser(data).observe(this, new Observer<UserModel>() {
+                @Override
+                public void onChanged(UserModel userModel) {
+                    System.out.println();
+                }
+            });
+        }
     }
 
 }

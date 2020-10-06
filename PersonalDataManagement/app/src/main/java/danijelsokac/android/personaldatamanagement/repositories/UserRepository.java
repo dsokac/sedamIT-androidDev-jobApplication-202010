@@ -105,4 +105,22 @@ public class UserRepository {
         return deletedUser;
     }
 
+    public MutableLiveData<UserModel> updateUser(UserModel user) {
+        MutableLiveData<UserModel> updatedUser = new MutableLiveData<>();
+        userService.updateUser(user, user.getId()).enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                updatedUser.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                if(errorListener != null) {
+                    errorListener.onErrorOccured(t.getMessage());
+                }
+            }
+        });
+        return updatedUser;
+    }
+
 }

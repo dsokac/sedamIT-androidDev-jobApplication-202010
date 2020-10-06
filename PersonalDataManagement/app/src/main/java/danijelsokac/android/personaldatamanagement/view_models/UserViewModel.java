@@ -48,4 +48,12 @@ public class UserViewModel extends ViewModel {
         }
         return newUser;
     }
+
+    public MutableLiveData<UserModel> updateUser(UserModel user) {
+        if(newUser == null) {
+            newUser = new MutableLiveData<>();
+            newUser = repository.updateUser(user);
+        }
+        return newUser;
+    }
 }
