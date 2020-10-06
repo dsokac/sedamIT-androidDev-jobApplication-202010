@@ -1,5 +1,6 @@
 package danijelsokac.android.personaldatamanagement.db.DAOs;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -26,14 +27,14 @@ public interface UserModelDao {
     void deleteAll(UserModel... users);
 
     @Query("SELECT * from app_users")
-    List<UserModel> getAll();
+    LiveData<List<UserModel>> getAll();
 
     @Query("SELECT * from app_users ORDER BY id ASC")
-    List<UserModel> getAllOrderByRemoteId();
+    LiveData<List<UserModel>> getAllOrderByRemoteId();
 
     @Query("SELECT * from app_users where local_id = :id")
-    UserModel getByLocalId(int id);
+    LiveData<UserModel> getByLocalId(int id);
 
     @Query("SELECT * from app_users where id = :id")
-    UserModel getByRemoteId(int id);
+    LiveData<UserModel> getByRemoteId(int id);
 }

@@ -1,5 +1,7 @@
 package danijelsokac.android.personaldatamanagement.db.DAOs;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -22,8 +24,8 @@ public interface ChangeLogDao {
     void insert(ChangeLog log);
 
     @Query("SELECT * from change_logs")
-    List<ChangeLog> getAll();
+    LiveData<List<ChangeLog>> getAll();
 
     @Query("SELECT * from change_logs where id = :id")
-    ChangeLog getById(int id);
+    LiveData<ChangeLog> getById(int id);
 }
