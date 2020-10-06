@@ -63,7 +63,11 @@ Kako bi se osiguralo da Lombok radi u Gradle-u, potrebno je osigurati sljedeće:
 
 ## Kako pokrenuti projekt
 - (1) Prije samog pokretanja projekta, zatvoriti postojeći i otići na "Configure > Settings > Build, Execution, Deployment > Compiler > Annotation Processors" i odabrati **Enable annotation processing** i potvrditi sa OK.
-- (2) Otvoriti projekt iz repozitorija i pričekati da se odrade pozadinski zadaci.
+- (2) Klonirati repozitorij prvo jer je unutar prve mape tek projekt za android studio.
+- (3) Otvoriti Android Studio i otvoriti postojeći projekt iz datotečnog sustava. Pronaći mapu koju ste klonirali.
+- (4) Kada se otvori, stavite "Invalidate caches / restart"
+- (5) Dok kaže da ne može loadati 2 modula (.iml datoteke), potrebno je obrisati ih i kliknut na "Make Project" (izbornik "Build")
+- (3) Pričekati da se odrade pozadinski zadaci.
 - (3) Jedino je kritična biblioteka **Lombok** te bi trebalo popratiti upute koje sam naveo za pregledavanje projekta sa Lombok-om. Ako postoji verzija lomobooka potrebno ju je možda ažurirati. (Ja sam ažurirao i imam v0.32-2018.3). Indikacija da je problem ovaj plugin je popis grešaka koje ne mogu naći gettere i settere.
 - (4) Aplikacija trenutno ne podržava offline pristup. Samo online.
 
