@@ -1,6 +1,5 @@
 package danijelsokac.android.personaldatamanagement.repositories;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package danijelsokac.android.personaldatamanagement.view_models;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 

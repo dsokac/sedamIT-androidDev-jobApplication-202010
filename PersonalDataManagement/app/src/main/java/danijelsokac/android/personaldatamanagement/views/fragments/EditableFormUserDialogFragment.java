@@ -1,7 +1,5 @@
 package danijelsokac.android.personaldatamanagement.views.fragments;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 
 import com.google.gson.Gson;
-
-import java.io.Serializable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +21,6 @@ import danijelsokac.android.personaldatamanagement.R;
 import danijelsokac.android.personaldatamanagement.databinding.UpdatePersonLayoutBinding;
 import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
-import danijelsokac.android.personaldatamanagement.repositories.UserRepository;
 
 public class EditableFormUserDialogFragment extends DialogFragment {
 
