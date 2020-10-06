@@ -20,40 +20,40 @@ public class UserViewModel extends ViewModel {
     public MutableLiveData<List<UserModel>> getUsers() {
         if(users == null) {
             users = new MutableLiveData<>();
-            users = repository.getUsers();
         }
+        users = repository.getUsers();
         return users;
     }
 
     public MutableLiveData<UserModel> getUserById(int id) {
         if(user == null) {
             user = new MutableLiveData<>();
-            user = repository.getUserById(id);
         }
+        user = repository.getUserById(id);
         return user;
     }
 
     public MutableLiveData<UserModel> deleteUserById(int id) {
         if(deletedUser == null) {
             deletedUser = new MutableLiveData<>();
-            deletedUser = repository.deleteUserById(id);
         }
+        deletedUser = repository.deleteUserById(id);
         return deletedUser;
     }
 
     public MutableLiveData<UserModel> saveUser(UserModel user) {
         if(newUser == null) {
             newUser = new MutableLiveData<>();
-            newUser = repository.saveUser(user);
         }
+        newUser = repository.saveUser(user);
         return newUser;
     }
 
     public MutableLiveData<UserModel> updateUser(UserModel user) {
         if(newUser == null) {
             newUser = new MutableLiveData<>();
-            newUser = repository.updateUser(user);
         }
+        newUser = repository.updateUser(user);
         return newUser;
     }
 }
