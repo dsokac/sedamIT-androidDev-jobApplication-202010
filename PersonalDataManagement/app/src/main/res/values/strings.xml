@@ -23,4 +23,9 @@
     <string name="delete_warning_dialog_title">Upozorenje pri brisanju</string>
     <string name="delete_warning_dialog_message_single">Jeste li sigurni da želite obrisati osobu \"%s\"?</string>
     <string name="delete_warning_dialog_message_multiple">Jeste li sigurni da želite obrisati %d osoba?</string>
+
+    <string name="error_invalid_email">E-mail nije validan!</string>
+    <string name="error_invalid_phone">Broj telefona nije validan!</string>
+    <string name="error_invalid_mobile">Broj mobitela nije validan!</string>
+    <string name="error_required">Polje je obavezno!</string>
 </resources>
