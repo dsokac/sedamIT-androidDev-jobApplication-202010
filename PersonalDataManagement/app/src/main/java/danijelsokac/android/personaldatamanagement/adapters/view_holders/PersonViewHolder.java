@@ -29,6 +29,7 @@ import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListe
 import danijelsokac.android.personaldatamanagement.models.UserModel;
 import danijelsokac.android.personaldatamanagement.view_models.UserViewModel;
 import danijelsokac.android.personaldatamanagement.views.fragments.EditableFormUserDialogFragment;
+import danijelsokac.android.personaldatamanagement.views.fragments.FormUserDialogFragment;
 
 public class PersonViewHolder extends RecyclerView.ViewHolder {
 
@@ -94,6 +95,8 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
     private void showUserDetails(UserModel user) {
         Toast.makeText(view.getContext(), "Details of " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();
 
+        FormUserDialogFragment  fragment = FormUserDialogFragment.newInstance(user);
+        fragment.show(fragmentManager.beginTransaction(), "FormUserDialogFragment");
     }
 
     private void updateUser(UserModel user) {
@@ -109,7 +112,5 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
         List<UserModel> delete = new ArrayList<>();
         delete.add(user);
         deleteListener.onDeleteAction(delete);
-
-
     }
 }
