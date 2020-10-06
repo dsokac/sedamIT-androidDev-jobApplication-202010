@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
                 rvAllPeople.post(new Runnable() {
                     @Override
                     public void run() {
+                        userList.remove(index);
                         adapter.notifyItemRemoved(index);
                     }
                 });
