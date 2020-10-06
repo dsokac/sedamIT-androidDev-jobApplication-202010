@@ -1,6 +1,7 @@
 package danijelsokac.android.personaldatamanagement.views.fragments;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
+
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,18 +86,21 @@ public class EditableFormUserDialogFragment extends DialogFragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserModel newUser = new UserModel();
-                if(user.getId() != 0) {
-                    newUser.setId(user.getId());
+                checkErrors();
+                if(!hasErrors()) {
+                    UserModel newUser = new UserModel();
+                    if (user.getId() != 0) {
+                        newUser.setId(user.getId());
+                    }
+                    newUser.setName(etName.getText().toString());
+                    newUser.setSurname(etSurname.getText().toString());
+                    newUser.setPhoneNumber(etPhone.getText().toString());
+                    newUser.setMobilePhoneNumber(etMobilePhone.getText().toString());
+                    newUser.setEmail(etEmail.getText().toString());
+                    newUser.setAddress(etAddress.getText().toString());
+                    listener.onSave(newUser);
+                    dismiss();
                 }
-                newUser.setName(etName.getText().toString());
-                newUser.setSurname(etSurname.getText().toString());
-                newUser.setPhoneNumber(etPhone.getText().toString());
-                newUser.setMobilePhoneNumber(etMobilePhone.getText().toString());
-                newUser.setEmail(etEmail.getText().toString());
-                newUser.setAddress(etAddress.getText().toString());
-                listener.onSave(newUser);
-                dismiss();
             }
         });
 
@@ -107,5 +113,53 @@ public class EditableFormUserDialogFragment extends DialogFragment {
         });
 
         return view;
+    }
+
+    private void checkErrors() {
+        isEmpty(etName, true);
+        isEmpty(etSurname, true);
+        isValid(etEmail, Patterns.EMAIL_ADDRESS, R.string.error_invalid_email,  true);
+        isValid(etPhone, Patterns.PHONE, R.string.error_invalid_phone);
+        isValid(etMobilePhone, Patterns.PHONE, R.string.error_invalid_mobile);
+    }
+
+    private boolean isEmpty(EditText et, boolean checkError, boolean required) {
+        boolean empty = checkError ? et.getError() == null || et.getError().toString().isEmpty() :
+                            et.getText() == null  || et.getText().toString().isEmpty();
+        if(empty && required) {
+            et.setError(getResources().getString(R.string.error_required));
+        }
+        return empty;
+    }
+
+    private boolean isEmpty(EditText et) {
+        return isEmpty(et, false, false);
+    }
+
+    private boolean isEmpty(EditText et, boolean required) {
+        return isEmpty(et, false, required);
+    }
+
+    private void isValid(EditText et, Pattern pattern, int errorResId, boolean required) {
+        if(!isEmpty(et)) {
+            boolean valid = pattern.matcher(et.getText().toString()).matches();
+            if(!valid) {
+                et.setError(getResources().getString(errorResId));
+            }
+        } else if(required) {
+            et.setError(getResources().getString(R.string.error_required));
+        }
+    }
+
+    private void isValid(EditText et, Pattern pattern, int errorResId) {
+        isValid(et, pattern, errorResId, false);
+    }
+
+    private boolean hasErrors() {
+        return !isEmpty(etEmail, true, false) ||
+               !isEmpty(etMobilePhone, true, false) ||
+               !isEmpty(etPhone, true, false) ||
+               !isEmpty(etName, true, false) ||
+               !isEmpty(etSurname, true, false);
     }
 }
