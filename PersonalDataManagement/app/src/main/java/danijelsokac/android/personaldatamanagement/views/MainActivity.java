@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
                         @Override
                         public void run() {
                             adapter.addItem(userModel);
+                            rvAllPeople.scrollToPosition(userList.size() - 1);
                         }
                     });
                 }
