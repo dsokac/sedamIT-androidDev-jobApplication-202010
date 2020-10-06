@@ -1,8 +1,11 @@
 package danijelsokac.android.personaldatamanagement.adapters.view_holders;
 
+import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -10,14 +13,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import danijelsokac.android.personaldatamanagement.R;
+import danijelsokac.android.personaldatamanagement.listeners.DeleteListener;
 import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
+import danijelsokac.android.personaldatamanagement.view_models.UserViewModel;
 import danijelsokac.android.personaldatamanagement.views.fragments.EditableFormUserDialogFragment;
 
 public class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -44,19 +54,19 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
     }
 
-    public void bind(UserModel user) {
+    public void bind(UserModel user, DeleteListener deleteListener) {
         tvFullName.setText(user.getName() + " " + user.getSurname());
         ivProfileImage.setImageResource(R.drawable.default_avatar);
         ibMenu.setImageResource(R.drawable.icon_menu_dots_vertical);
         ibMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenu(view, user);
+                openMenu(view, user, deleteListener);
             }
         });
     }
 
-    private void openMenu(View v, UserModel user) {
+    private void openMenu(View v, UserModel user, DeleteListener deleteListener) {
         PopupMenu menu = new PopupMenu(view.getContext(), v);
         MenuInflater inflater = menu.getMenuInflater();
         inflater.inflate(R.menu.dot_menu, menu.getMenu());
@@ -73,7 +83,7 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
                         updateUser(user);
                         return true;
                     case R.id.delete:
-                        deleteUser(user);
+                        deleteUser(user, deleteListener);
                         return true;
                     default: return false;
                 }
@@ -93,7 +103,13 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
         fragment.show(fragmentManager.beginTransaction(), "EditableFormUserDialogFragment");
     }
 
-    private void deleteUser(UserModel user) {
+    private void deleteUser(UserModel user, DeleteListener deleteListener) {
         Toast.makeText(view.getContext(), "Delete " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();;
+
+        List<UserModel> delete = new ArrayList<>();
+        delete.add(user);
+        deleteListener.onDeleteAction(delete);
+
+
     }
 }

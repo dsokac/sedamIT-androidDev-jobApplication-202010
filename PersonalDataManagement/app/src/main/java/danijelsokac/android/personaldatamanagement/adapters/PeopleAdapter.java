@@ -13,6 +13,7 @@ import java.util.List;
 
 import danijelsokac.android.personaldatamanagement.R;
 import danijelsokac.android.personaldatamanagement.adapters.view_holders.PersonViewHolder;
+import danijelsokac.android.personaldatamanagement.listeners.DeleteListener;
 import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
 
@@ -22,10 +23,12 @@ public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
     private Context context;
     private FragmentManager fragmentManager;
     private  DialogFragmentListener listener;
+    private DeleteListener deleteListener;
 
-    public PeopleAdapter(List<UserModel> data, Context context) {
+    public PeopleAdapter(List<UserModel> data, Context context, DeleteListener deleteListener) {
         this.context = context;
         this.data = data;
+        this.deleteListener = deleteListener;
     }
 
     public void setFragmentManager(FragmentManager fragmentManager) {
@@ -53,7 +56,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
-        holder.bind(this.data.get(position));
+        holder.bind(this.data.get(position), deleteListener);
     }
 
     @Override
@@ -63,6 +66,15 @@ public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
 
 
     public void updateItem(UserModel user) {
+        int location = getItemIndex(user);
+        if(location != -1) {
+            data.remove(location);
+            data.add(location, user);
+            notifyItemChanged(location);
+        }
+    }
+
+    public int getItemIndex(UserModel user) {
         int location = -1;
         for(int i = 0; i < data.size(); i++) {
             UserModel item = data.get(i);
@@ -71,10 +83,6 @@ public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
                 break;
             }
         }
-        if(location != -1) {
-            data.remove(location);
-            data.add(location, user);
-            notifyItemChanged(location);
-        }
+        return location;
     }
 }

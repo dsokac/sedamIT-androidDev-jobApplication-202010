@@ -1,10 +1,12 @@
 package danijelsokac.android.personaldatamanagement.views;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,12 +23,13 @@ import butterknife.ButterKnife;
 import danijelsokac.android.personaldatamanagement.R;
 import danijelsokac.android.personaldatamanagement.adapters.PeopleAdapter;
 import danijelsokac.android.personaldatamanagement.item_decorators.SpacingDecorator;
+import danijelsokac.android.personaldatamanagement.listeners.DeleteListener;
 import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
 import danijelsokac.android.personaldatamanagement.view_models.UserViewModel;
 import danijelsokac.android.personaldatamanagement.views.fragments.EditableFormUserDialogFragment;
 
-public class MainActivity extends AppCompatActivity  implements DialogFragmentListener {
+public class MainActivity extends AppCompatActivity  implements DialogFragmentListener, DeleteListener {
 
     @BindView(R.id.rlMainViewContainer) RelativeLayout rlContainer;
     @BindView(R.id.rvAllPeople) RecyclerView rvAllPeople;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        adapter = new PeopleAdapter(userList, this);
+        adapter = new PeopleAdapter(userList, this, this);
         adapter.setFragmentManager(getSupportFragmentManager());
         adapter.setListener(this);
         rvAllPeople.setAdapter(adapter);
@@ -124,4 +127,47 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
         }
     }
 
+    @Override
+    public void onDeleteAction(List<UserModel> users) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Upozorenje pri brisanju");
+        if(users.size() == 1) {
+            UserModel user = users.get(0);
+            builder.setMessage("Jeste li sigurni da želite obrisati osobu '" + user.getFullName() + "'?");
+        } else {
+            builder.setMessage("Jeste li sigurni da želite obrisati " + users.size() + " osoba?");
+        }
+        builder.setPositiveButton("DA", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Pokreni brisanje", Toast.LENGTH_SHORT).show();
+                for(UserModel item :  users) {
+                    performDeletion(item);
+                }
+            }
+        });
+        builder.setNegativeButton("NE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "NE pokreni brisanje", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void performDeletion(UserModel user) {
+        int index = adapter.getItemIndex(user);
+        userViewModel.deleteUserById(user.getId()).observe(this, new Observer<UserModel>() {
+            @Override
+            public void onChanged(UserModel userModel) {
+                rvAllPeople.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyItemRemoved(index);
+                    }
+                });
+            }
+        });
+    }
 }
