@@ -27,7 +27,6 @@ import danijelsokac.android.personaldatamanagement.R;
 import danijelsokac.android.personaldatamanagement.listeners.DeleteListener;
 import danijelsokac.android.personaldatamanagement.listeners.DialogFragmentListener;
 import danijelsokac.android.personaldatamanagement.models.UserModel;
-import danijelsokac.android.personaldatamanagement.view_models.UserViewModel;
 import danijelsokac.android.personaldatamanagement.views.fragments.EditableFormUserDialogFragment;
 import danijelsokac.android.personaldatamanagement.views.fragments.FormUserDialogFragment;
 
@@ -93,22 +92,16 @@ public class PersonViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void showUserDetails(UserModel user) {
-        Toast.makeText(view.getContext(), "Details of " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();
-
         FormUserDialogFragment  fragment = FormUserDialogFragment.newInstance(user);
         fragment.show(fragmentManager.beginTransaction(), "FormUserDialogFragment");
     }
 
     private void updateUser(UserModel user) {
-        Toast.makeText(view.getContext(), "Update  " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();
-
         EditableFormUserDialogFragment fragment = EditableFormUserDialogFragment.newInstance(user, listener);
         fragment.show(fragmentManager.beginTransaction(), "EditableFormUserDialogFragment");
     }
 
     private void deleteUser(UserModel user, DeleteListener deleteListener) {
-        Toast.makeText(view.getContext(), "Delete " + user.getName() + " " + user.getSurname() + "( " + user.getId() + ")", Toast.LENGTH_SHORT).show();;
-
         List<UserModel> delete = new ArrayList<>();
         delete.add(user);
         deleteListener.onDeleteAction(delete);
