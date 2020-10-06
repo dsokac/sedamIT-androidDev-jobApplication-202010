@@ -62,10 +62,10 @@ Kako bi se osiguralo da Lombok radi u Gradle-u, potrebno je osigurati sljedeće:
 **Da bi se moglo gledati projekt sa Lombokom** potrebno je otići na "File > Settings > Plugins", kliknuti na "Browse repositories...", potražiti "Lombok Plugin", instalirati ga i ponovno pokrenuti Android studio.
 
 ## Kako pokrenuti projekt
-(1) Prije samog pokretanja projekta, zatvoriti postojeći i otići na "Configure > Settings > Build, Execution, Deployment > Compiler > Annotation Processors" i odabrati **Enable annotation processing** i potvrditi sa OK.
-(2) Otvoriti projekt iz repozitorija i pričekati da se odrade pozadinski zadaci.
-(3) Jedino je kritična biblioteka **Lombok** te bi trebalo popratiti upute koje sam naveo za pregledavanje projekta sa Lombok-om. Ako postoji verzija lomobooka potrebno ju je možda ažurirati. (Ja sam ažurirao i imam v0.32-2018.3). Indikacija da je problem ovaj plugin je popis grešaka koje ne mogu naći gettere i settere.
-(4) Aplikacija trenutno ne podržava offline pristup. Samo online.
+- (1) Prije samog pokretanja projekta, zatvoriti postojeći i otići na "Configure > Settings > Build, Execution, Deployment > Compiler > Annotation Processors" i odabrati **Enable annotation processing** i potvrditi sa OK.
+- (2) Otvoriti projekt iz repozitorija i pričekati da se odrade pozadinski zadaci.
+- (3) Jedino je kritična biblioteka **Lombok** te bi trebalo popratiti upute koje sam naveo za pregledavanje projekta sa Lombok-om. Ako postoji verzija lomobooka potrebno ju je možda ažurirati. (Ja sam ažurirao i imam v0.32-2018.3). Indikacija da je problem ovaj plugin je popis grešaka koje ne mogu naći gettere i settere.
+- (4) Aplikacija trenutno ne podržava offline pristup. Samo online.
 
 ## Problemi koje sam imao u projektu
 U projektu nisam mogao realizirati *two-way binding* koristeći Data Binding biblioteku. Uspio sam složiti samo da se učitava na layout, ali nisam uspio dohvatiti promijenjene podatke. Zbog raspoloživog vremena sam odlučio ostaviti samo bindanje u jednom smjeru. Data Binding se koristi u DijalogFragment-ima.
