@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
- <item android:id="@+id/details" android:title="Details"></item>
- <item android:id="@+id/update" android:title="Update"></item>
- <item android:id="@+id/delete" android:title="Delete"></item>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+ <item android:id="@+id/details" android:icon="@drawable/icon_account" android:title="@string/app_details"></item>
+ <item android:id="@+id/update" android:title="@string/app_update"></item>
+ <item android:id="@+id/delete" android:title="@string/app_delete"></item>
 </menu>

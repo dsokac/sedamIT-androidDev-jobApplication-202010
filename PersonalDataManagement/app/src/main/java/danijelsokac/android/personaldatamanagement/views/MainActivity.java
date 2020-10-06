@@ -130,27 +130,24 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
     @Override
     public void onDeleteAction(List<UserModel> users) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Upozorenje pri brisanju");
+        builder.setTitle(R.string.delete_warning_dialog_title);
         if(users.size() == 1) {
             UserModel user = users.get(0);
-            builder.setMessage("Jeste li sigurni da želite obrisati osobu '" + user.getFullName() + "'?");
+            builder.setMessage(getResources().getString(R.string.delete_warning_dialog_message_single, user.getFullName()));
         } else {
-            builder.setMessage("Jeste li sigurni da želite obrisati " + users.size() + " osoba?");
+            builder.setMessage(getResources().getString(R.string.delete_warning_dialog_message_multiple,  users.size()));
         }
-        builder.setPositiveButton("DA", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(), "Pokreni brisanje", Toast.LENGTH_SHORT).show();
                 for(UserModel item :  users) {
                     performDeletion(item);
                 }
             }
         });
-        builder.setNegativeButton("NE", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.app_no, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(), "NE pokreni brisanje", Toast.LENGTH_SHORT).show();
-            }
+            public void onClick(DialogInterface dialogInterface, int i) { }
         });
 
         builder.show();

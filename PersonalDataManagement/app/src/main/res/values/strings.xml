@@ -4,6 +4,12 @@
     <string name="default_text">Random tekst</string>
     <string name="item_menu_icon_desc">Icon of the menu</string>
 
+    <string name="app_details">Pojedinosti</string>
+    <string name="app_delete">Obriši</string>
+    <string name="app_update">Ažuriraj</string>
+    <string name="app_yes">Da</string>
+    <string name="app_no">Ne</string>
+
     <string name="form_name_label">Ime:</string>
     <string name="form_surname_label">Prezime:</string>
     <string name="form_phone_label">Telefon:</string>
@@ -12,4 +18,9 @@
     <string name="form_address_label">Adresa:</string>
     <string name="form_save_label">Spremi</string>
     <string name="form_cancel_label">Poništi</string>
+    <string name="form_close_label">Zatvori</string>
+
+    <string name="delete_warning_dialog_title">Upozorenje pri brisanju</string>
+    <string name="delete_warning_dialog_message_single">Jeste li sigurni da želite obrisati osobu \"%s\"?</string>
+    <string name="delete_warning_dialog_message_multiple">Jeste li sigurni da želite obrisati %d osoba?</string>
 </resources>
