@@ -15,6 +15,7 @@ public class UserViewModel extends ViewModel {
     private MutableLiveData<UserModel> user;
     private MutableLiveData<UserModel> newUser;
     private MutableLiveData<UserModel> deletedUser;
+    private MutableLiveData<UserModel> updatedUser;
 
     public MutableLiveData<List<UserModel>> getUsers() {
         if(users == null) {
@@ -49,10 +50,10 @@ public class UserViewModel extends ViewModel {
     }
 
     public MutableLiveData<UserModel> updateUser(UserModel user) {
-        if(newUser == null) {
-            newUser = new MutableLiveData<>();
+        if(updatedUser == null) {
+            updatedUser = new MutableLiveData<>();
         }
-        newUser = repository.updateUser(user);
-        return newUser;
+        updatedUser = repository.updateUser(user);
+        return updatedUser;
     }
 }
