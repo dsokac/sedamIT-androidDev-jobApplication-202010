@@ -36,6 +36,11 @@ public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
         this.listener = listener;
     }
 
+    public void addItem(UserModel user) {
+        this.data.add(user);
+        notifyItemInserted(this.data.size() - 1);
+    }
+
     @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,8 +61,20 @@ public class PeopleAdapter extends RecyclerView.Adapter<PersonViewHolder> {
         return this.data.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return this.data.get(position).getId();
+
+    public void updateItem(UserModel user) {
+        int location = -1;
+        for(int i = 0; i < data.size(); i++) {
+            UserModel item = data.get(i);
+            if(user.getId() == item.getId()) {
+                location = i;
+                break;
+            }
+        }
+        if(location != -1) {
+            data.remove(location);
+            data.add(location, user);
+            notifyItemChanged(location);
+        }
     }
 }

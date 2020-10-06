@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
     @BindView(R.id.fabAction) FloatingActionButton fabACtion;
 
     private UserViewModel userViewModel;
+    private PeopleAdapter adapter;
+    private List<UserModel> userList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +42,25 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Object obj = this;
+        adapter = new PeopleAdapter(userList, this);
+        adapter.setFragmentManager(getSupportFragmentManager());
+        adapter.setListener(this);
+        rvAllPeople.setAdapter(adapter);
+
+        GridLayoutManager manager = new GridLayoutManager(this, 3);
+        rvAllPeople.setLayoutManager(manager);
+        rvAllPeople.addItemDecoration(new SpacingDecorator(10));
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getUsers().observe(this, users -> {
             Toast.makeText(this, "Users arrived", Toast.LENGTH_SHORT).show();
-            System.out.println();
-
-            PeopleAdapter adapter = new PeopleAdapter(users, ((MainActivity) obj).getApplicationContext());
-            adapter.setFragmentManager(getSupportFragmentManager());
-            adapter.setListener(this);
-            GridLayoutManager manager = new GridLayoutManager((MainActivity)obj, 3);
-            rvAllPeople.setLayoutManager(manager);
-            rvAllPeople.addItemDecoration(new SpacingDecorator(10));
-            rvAllPeople.setAdapter(adapter);
-
+            userList.addAll(users);
+            rvAllPeople.post(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyItemInserted(userList.size());
+                }
+            });
         });
         userViewModel.getUserById(4).observe(this, user -> {
             Toast.makeText(this, "User arrived", Toast.LENGTH_SHORT).show();
@@ -67,6 +73,14 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
                 addNewUser();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(adapter != null) {
+            rvAllPeople.setAdapter(adapter);
+        }
     }
 
     private void addNewUser() {
@@ -87,6 +101,24 @@ public class MainActivity extends AppCompatActivity  implements DialogFragmentLi
                 @Override
                 public void onChanged(UserModel userModel) {
                     System.out.println();
+                    rvAllPeople.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.updateItem(userModel);
+                        }
+                    });
+                }
+            });
+        } else {
+            userViewModel.saveUser(data).observe(this, new Observer<UserModel>() {
+                @Override
+                public void onChanged(UserModel userModel) {
+                    rvAllPeople.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.addItem(userModel);
+                        }
+                    });
                 }
             });
         }
