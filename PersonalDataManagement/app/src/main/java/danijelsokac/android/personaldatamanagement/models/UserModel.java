@@ -3,6 +3,8 @@ package danijelsokac.android.personaldatamanagement.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,5 +29,25 @@ public class UserModel {
     }
     public void setFullName(String value) {
         fullName = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserModel userModel = (UserModel) o;
+        return getId() == userModel.getId() &&
+                Objects.equals(getName(), userModel.getName()) &&
+                Objects.equals(getSurname(), userModel.getSurname()) &&
+                Objects.equals(getPhoneNumber(), userModel.getPhoneNumber()) &&
+                Objects.equals(getMobilePhoneNumber(), userModel.getMobilePhoneNumber()) &&
+                Objects.equals(getEmail(), userModel.getEmail()) &&
+                Objects.equals(getAddress(), userModel.getAddress()) &&
+                Objects.equals(getFullName(), userModel.getFullName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getSurname(), getPhoneNumber(), getMobilePhoneNumber(), getEmail(), getAddress(), getFullName());
     }
 }
