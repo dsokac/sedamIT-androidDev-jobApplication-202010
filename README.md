@@ -72,16 +72,16 @@ U projektu nisam mogao realizirati *two-way binding* koristeći Data Binding bib
 
 ## Poboljšanja
 U nastavku ću vam navesti sva poboljšanja koja sam planirao implementirati (i koja vjerojatno budem implementirao u bližoj budućnosti):
-[ ] Prikazati poruku da nema podataka kada nije učitan ni jedan podatak.
-[ ] Kada nema podataka i interneta, da nije moguće dohvatiti podatke sa interneta bez internet veze.
-[ ] Kada ima podataka u bazi i nema interneta kada korisnik dodaje, ažurira i briše, da se provjerava BroadcastReceiver koji će čekati da dođe internet i pokrenuti sinkronizaciju
-[ ] Kada korisnik dodaje, briše ili ažurira lokalno, svaka od tih operacija uključuje spremanje u bazu i nakon toga spremanje na API
-[ ] Kada korisnik dohvaća podatke, dohvaća ih isključivo lokalno iz baze podataka
-[ ] Ako nema podataka u bazi, podaci se dohvaćaju sa interneta i spremaju u bazu. Prikazuju se podaci dohvaćeni sa API, ali samo ovaj puta.
-[ ] Implementirati "select more" na način da dugi dodir na jednu osobu otvori mogućnost za označiti više njih. I onda se floating button bi pretvorio u "X" te bi služio brisanju označenih zapisa.
-[ ] Implementirati "select all" koji bi se složio kao dugi dodir na osobu na kojoj je već uključena mogućnost odabira više stavki. Otvorio bi se kao kontekstualni izbornik u kojem bi bila jedna opcija "Odaberi sve". 
-[ ] Implementacija paginacije za dohvat podataka
-[ ] Implementacija sinkronizacije sa sljedećim algoritmom:
+- Prikazati poruku da nema podataka kada nije učitan ni jedan podatak.
+- Kada nema podataka i interneta, da nije moguće dohvatiti podatke sa interneta bez internet veze.
+- Kada ima podataka u bazi i nema interneta kada korisnik dodaje, ažurira i briše, da se provjerava BroadcastReceiver koji će čekati da dođe internet i pokrenuti sinkronizaciju
+- Kada korisnik dodaje, briše ili ažurira lokalno, svaka od tih operacija uključuje spremanje u bazu i nakon toga spremanje na API
+- Kada korisnik dohvaća podatke, dohvaća ih isključivo lokalno iz baze podataka
+- Ako nema podataka u bazi, podaci se dohvaćaju sa interneta i spremaju u bazu. Prikazuju se podaci dohvaćeni sa API, ali samo ovaj puta.
+- Implementirati "select more" na način da dugi dodir na jednu osobu otvori mogućnost za označiti više njih. I onda se floating button bi pretvorio u "X" te bi služio brisanju označenih zapisa.
+- Implementirati "select all" koji bi se složio kao dugi dodir na osobu na kojoj je već uključena mogućnost odabira više stavki. Otvorio bi se kao kontekstualni izbornik u kojem bi bila jedna opcija "Odaberi sve". 
+- Implementacija paginacije za dohvat podataka
+- Implementacija sinkronizacije sa sljedećim algoritmom:
 ```
 Provjeravaju se vrijednosti ID  polja za prvi i zadnji element u listi
 Ako su vrijednosti različite, onda:
